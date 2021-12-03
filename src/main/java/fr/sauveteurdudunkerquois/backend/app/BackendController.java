@@ -2,6 +2,7 @@ package fr.sauveteurdudunkerquois.backend.app;
 
 import fr.sauveteurdudunkerquois.backend.data.article.Article;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,11 +20,13 @@ public class BackendController {
         repo = repository;
     }
 
+	@Bean
     @PostMapping
     public void addArticle(@RequestBody Article article) {
 		repo.save(article);
 	}
 
+	@Bean
     @GetMapping
     public ResponseEntity<List<Article>> getArticles() {
 		List<Article> articles = new ArrayList<>();
