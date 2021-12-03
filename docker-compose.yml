@@ -5,9 +5,9 @@ services:
     deploy:
       replicas: 3
     labels:
-      - "traefik.http.routers.todolist.rule=PathPrefix(`/app`)"
-      - "traefik.http.middlewares.todolist.stripPrefix.prefixes=/app"
-      - "traefik.http.routers.todolist.middlewares=todolist@docker"
+      - "traefik.http.routers.backend.rule=PathPrefix(`/app`)"
+      - "traefik.http.middlewares.backend.stripPrefix.prefixes=/app"
+      - "traefik.http.routers.backend.middlewares=backend@docker"
 
   traefik:
     image: traefik:latest
@@ -24,5 +24,7 @@ services:
     container_name: postgres
     ports:
       - "5432:5432"
+    volumes:
+        -   ./data.sql:/docker-entrypoint-initdb.d/data.sql
     environment:
       POSTGRES_PASSWORD: admin

@@ -1,15 +1,7 @@
 ------------------------------------------------------------
---        Script Postgre
-------------------------------------------------------------
-
-DROP DATABASE NDI;
-DROP SCHEMA ndi CASCADE;
-CREATE DATABASE NDI;
-CREATE SCHEMA ndi;
-------------------------------------------------------------
 -- Table: Article
 ------------------------------------------------------------
-CREATE TABLE ndi.Article(
+CREATE TABLE Article(
 	id_article    SERIAL NOT NULL ,
 	Title         VARCHAR (50) NOT NULL ,
 	Date          DATE  NOT NULL ,
@@ -24,7 +16,7 @@ CREATE TABLE ndi.Article(
 ------------------------------------------------------------
 -- Table: Personne
 ------------------------------------------------------------
-CREATE TABLE ndi.Personne(
+CREATE TABLE Personne(
 	Id_personne   SERIAL NOT NULL ,
 	Nom           VARCHAR (32) NOT NULL ,
 	Prenom        VARCHAR (32) NOT NULL ,
@@ -36,7 +28,7 @@ CREATE TABLE ndi.Personne(
 ------------------------------------------------------------
 -- Table: Bateau
 ------------------------------------------------------------
-CREATE TABLE ndi.Bateau(
+CREATE TABLE Bateau(
 	Id_Bateau     SERIAL NOT NULL ,
 	Nom           VARCHAR (32) NOT NULL ,
 	Img_bateau    VARCHAR (50) NOT NULL ,
@@ -48,7 +40,7 @@ CREATE TABLE ndi.Bateau(
 ------------------------------------------------------------
 -- Table: rel1
 ------------------------------------------------------------
-CREATE TABLE ndi.rel1(
+CREATE TABLE rel1(
 	id_article    SERIAL NOT NULL ,
 	Id_personne   SERIAL NOT NULL  ,
 	CONSTRAINT rel1_AK UNIQUE (id_article,Id_personne)
@@ -58,13 +50,13 @@ CREATE TABLE ndi.rel1(
 ------------------------------------------------------------
 -- Table: relation_personne_bateau
 ------------------------------------------------------------
-CREATE TABLE ndi.relation_personne_bateau(
+CREATE TABLE relation_personne_bateau(
 	Id_Bateau     INT  NOT NULL ,
 	Id_personne   INT  NOT NULL  ,
-	CONSTRAINT relation_personne_bateau_PK PRIMARY KEY (Id_Bateau,Id_personne)
+	CONSTRAINT relation_Personne_bateau_PK PRIMARY KEY (Id_Bateau,Id_personne)
 
-	,CONSTRAINT relation_personne_bateau_Bateau_FK FOREIGN KEY (Id_Bateau) REFERENCES public.Bateau(Id_Bateau)
-	,CONSTRAINT relation_personne_bateau_Perswonne0_FK FOREIGN KEY (Id_personne) REFERENCES public.Personne(Id_personne)
+	,CONSTRAINT relation_Personne_bateau_Bateau_FK FOREIGN KEY (Id_Bateau) REFERENCES Bateau(Id_Bateau)
+	,CONSTRAINT relation_Personne_bateau_Personne_FK FOREIGN KEY (Id_personne) REFERENCES Personne(Id_personne)
 )WITHOUT OIDS;
 
 alter table Personne alter column description TYPE text;
@@ -75,4 +67,3 @@ delete from Personne where Id_personne='3';
 
 insert into Personne values ('1','ALEXIS','JOFFROY','');
 insert into Personne values ('3','ALEXIS','JOFFROY','tedddddd' );
-
