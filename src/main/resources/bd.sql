@@ -28,7 +28,7 @@ CREATE TABLE ndi.Personne(
 	Id_personne   SERIAL NOT NULL ,
 	Nom           VARCHAR (32) NOT NULL ,
 	Prenom        VARCHAR (32) NOT NULL ,
-	Description   VARCHAR (128) NOT NULL  ,
+	Description   TEXT NOT NULL,
 	CONSTRAINT Personne_PK PRIMARY KEY (Id_personne)
 )WITHOUT OIDS;
 
@@ -40,7 +40,7 @@ CREATE TABLE ndi.Bateau(
 	Id_Bateau     SERIAL NOT NULL ,
 	Nom           VARCHAR (32) NOT NULL ,
 	Img_bateau    VARCHAR (50) NOT NULL ,
-	Description   VARCHAR (50) NOT NULL  ,
+	Description   VARCHAR(500) NOT NULL  ,
 	CONSTRAINT Bateau_PK PRIMARY KEY (Id_Bateau)
 )WITHOUT OIDS;
 
@@ -64,9 +64,15 @@ CREATE TABLE ndi.relation_personne_bateau(
 	CONSTRAINT relation_personne_bateau_PK PRIMARY KEY (Id_Bateau,Id_personne)
 
 	,CONSTRAINT relation_personne_bateau_Bateau_FK FOREIGN KEY (Id_Bateau) REFERENCES public.Bateau(Id_Bateau)
-	,CONSTRAINT relation_personne_bateau_Personne0_FK FOREIGN KEY (Id_personne) REFERENCES public.Personne(Id_personne)
+	,CONSTRAINT relation_personne_bateau_Perswonne0_FK FOREIGN KEY (Id_personne) REFERENCES public.Personne(Id_personne)
 )WITHOUT OIDS;
 
+alter table Personne alter column description TYPE text;
 
-insert into Personne values ('2','ALEXIS','JOFFROY','test')
+delete from Personne where Id_personne='1';
+delete from Personne where Id_personne='2';
+delete from Personne where Id_personne='3';
+
+insert into Personne values ('1','ALEXIS','JOFFROY','');
+insert into Personne values ('3','ALEXIS','JOFFROY','tedddddd' );
 
